@@ -4,6 +4,7 @@ function [ selected_v ] = random_select( data, iter, U, seed )
 % @date: 10/25/2018
 % @email: ww6p9@mail.missouri.edu
 % @University of Missouri-Columbia
+% @Revised: 08/25/2019
 
     % propabilities to choose cluster center
     N = size(data, 1);

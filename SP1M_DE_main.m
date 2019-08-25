@@ -10,7 +10,6 @@ close all;clear;clc;
 
 addpath('functions/');
 DATA_PATH = "datasets/clusterData_ANFIS_noise1.csv";
-% DATA_PATH = "datasets/example_3_clusters.dat";
 
 data = importdata(DATA_PATH);  % import dataset
 
@@ -24,12 +23,13 @@ C = 100;
 SEED = 2019; % for reproducible experiments
 ALPHA = 0.5; % alpha cut
 CLUSTER_PERCENT = 0.02; % # of points in a cluster < CLUSTER_PERCENT, removed
+sparse_fac = -0.001; % noise factor removal, detail in paper
 
-% tune the eta scaler
+% tune the eta scaler 
 scaler = 0.3;
 
 %% Running SP1M-DE
-[U, V] = sp1m(data, C, SEED, ALPHA, scaler, CLUSTER_PERCENT);
+[U, V] = sp1m(data, C, SEED, ALPHA, scaler, CLUSTER_PERCENT, sparse_fac);
 
 %% Visualize the clustering results
 

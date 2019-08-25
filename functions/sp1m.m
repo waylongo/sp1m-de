@@ -1,4 +1,4 @@
-function [ Uall, Vall] = sp1m( data, C, SEED, ALPHA, scaler, CLUSTER_PERCENT)
+function [ Uall, Vall] = sp1m( data, C, SEED, ALPHA, scaler, CLUSTER_PERCENT, sparse_fac)
 % Sequential Possibilistic One-Means Clustering with Dynamic Eta (SP1M-DE)
 % @author: Wenlong Wu
 % @date: 10/25/2018
@@ -46,7 +46,7 @@ for iter=1:C
     while(1)
         
     % estimate dynamic eta
-    [estimated_eta, found] = dynamic_estimate_eta(v(iter,:), data, eta_base, scaler,ALPHA);
+    [estimated_eta, found] = dynamic_estimate_eta(v(iter,:), data, eta_base, scaler,ALPHA, sparse_fac);
     
     eta(iter) = estimated_eta;
     

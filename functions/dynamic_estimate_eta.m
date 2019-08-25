@@ -1,8 +1,13 @@
-function [estimated_eta, found] = dynamic_estimate_eta(center, data, eta_base, scaler, ALPHA)
+function [estimated_eta, found] = dynamic_estimate_eta(center, data, eta_base, scaler, ALPHA, sparse_fac)
+% Dynamic estimated eta value
+% @author: Wenlong Wu
+% @date: 10/25/2018
+% @email: ww6p9@mail.missouri.edu
+% @University of Missouri-Columbia
+% @Revised: 08/25/2019
 
 d = pdist2(center, data) .^ 2;
 
-N=size(data,1);
 fzr=1.5;
 % dynamic eta processing
 steps = 100;
@@ -10,7 +15,7 @@ eta_tmp=zeros(1,steps);
 u_avg=zeros(1,steps); % define the average membership
 u_avg_diff=zeros(1,steps-1);
 found=true;
-% ALPHA = ALPHA * 0.5;
+% ALPHA = ALPHA * 0.1; % tune ALPHA
 
 % dynamic eta loop
 for eta_step=1:steps
@@ -32,7 +37,7 @@ end
 % difference of difference of membership
 for m=1: steps-2
     u_avg_diff_diff(m)=u_avg_diff(m+1)-u_avg_diff(m);
-    if(u_avg_diff_diff > -0.001)  % remove noisy points
+    if(u_avg_diff_diff > sparse_fac)  % remove noisy points
         found=false;
         break;
     end

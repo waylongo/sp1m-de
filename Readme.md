@@ -28,6 +28,10 @@ Tune "*scaler*" to scale up/down the "*eta*" value if cluster size is not Gaussi
 
 Other parameters are listed in **Parameters** section in **SP1M_DE_main.m** function.
 
+### Example
+
+![](imgs/result.png)
+
 ### Base Environment
 
 MATLAB R2019a
